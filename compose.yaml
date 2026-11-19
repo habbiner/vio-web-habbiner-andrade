@@ -3,12 +3,40 @@ services:
     build:
       context: ./backend
     image: vio-backend:aula05
-    ports:
-      - "127.0.0.1:3000:3000"
+    container_name: vio-backend
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      - vio
 
   frontend:
     build:
       context: ./frontend
     image: vio-frontend:aula05
+    container_name: vio-frontend
+    restart: unless-stopped
+    expose:
+      - "80"
     ports:
-      - "80:80"
+      - "127.0.0.1:18080:80"
+    networks:
+      - vio
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.vio-fatec.rule=Host(`fatec.conectandocidades.com.br`)
+      - traefik.http.routers.vio-fatec.entrypoints=websecure
+      - traefik.http.routers.vio-fatec.tls=true
+      - traefik.http.routers.vio-fatec.tls.certresolver=letsencrypt
+      - traefik.http.routers.vio-fatec.service=vio-fatec
+      - traefik.http.routers.vio-fatec-http.rule=Host(`fatec.conectandocidades.com.br`)
+      - traefik.http.routers.vio-fatec-http.entrypoints=web
+      - traefik.http.routers.vio-fatec-http.middlewares=redirect-https@file
+      - traefik.http.services.vio-fatec.loadbalancer.server.port=80
+
+networks:
+  vio:
+  proxy:
+    external: true

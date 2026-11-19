@@ -84,7 +84,7 @@ jobs:
 
           # Confirma que a API responde pela porta HTTP do Nginx.
           resposta=$(curl -fsS --max-time 5 --retry 5 --retry-delay 2 \
-            --retry-all-errors http://127.0.0.1/api/status)
+            --retry-all-errors http://127.0.0.1:18080/api/status)
           printf '%s\n' "$resposta"
           grep -Eq '"status"[[:space:]]*:[[:space:]]*"online"' <<< "$resposta"
           DEPLOY
