@@ -61,6 +61,6 @@ app.get("/api/eventos/:id", (req, res) => {
   res.json(evento);
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`API VIO executando em http://localhost:${PORT}`);
 });
