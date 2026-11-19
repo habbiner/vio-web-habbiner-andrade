@@ -1,4 +1,4 @@
-name: Implantar VIO na Azure
+name: Implantar VIO na Com4
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 permissions: {}
 
 concurrency:
-  group: vio-deploy-azure
+  group: vio-deploy-com4
   cancel-in-progress: false
 
 jobs:
