@@ -60,6 +60,7 @@ function App() {
         <h1>VIO WEB</h1>
         <p>Venda de Ingressos Online</p>
         <p>Habbiner S Andrade — 4º DS Noite</p>
+        <p>Versão 1.0.1</p>
       </header>
 
       <main className="conteudo">
